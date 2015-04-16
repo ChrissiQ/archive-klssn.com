@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+    if (res.err) res.render('Error!' + res.err)
+    res.render('index', { title: 'Chrissi Klassen'})
 });
-
-module.exports = router;
+export default router;

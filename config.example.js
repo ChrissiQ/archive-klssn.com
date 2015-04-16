@@ -7,24 +7,44 @@ const rootPath = path.resolve(__dirname + '../')
 
  export var development = {
   root: rootPath,
-  db: 'mongodb://localhost/expresstest',
+  redis: { 
+    host: 'localhost',
+    port: 6379,
+    db: 2,
+    pass: 'RedisPASS'
+  },
   session_secret: '1234asdf'
 };
 
 export var test = {
   root: rootPath,
-  db: 'mongodb://localhost/expresstest',
+  redis: { 
+    host: 'localhost',
+    port: 6379,
+    db: 2,
+    pass: 'RedisPASS'
+  },
   session_secret: '1234asdf'
 };
 
 export var staging = {
   root: rootPath,
-  db: process.env.MONGOHQ_URL,
+  redis: { 
+    host: 'localhost',
+    port: 6379,
+    db: 2,
+    pass: 'RedisPASS'
+  },
   session_secret: '1234asdf'
 };
 
 export var production = {
   root: rootPath,
-  db: process.env.MONGOHQ_URL,
+  redis: { 
+    host: 'localhost',
+    port: 6379,
+    db: 2,
+    pass: 'RedisPASS'
+  },
   session_secret: '1234asdf'
 };

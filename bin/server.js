@@ -7,6 +7,23 @@
 import app from '../app';
 import http from 'http';
 import debug from 'debug';
+import passport from 'passport';
+import session from 'express-session';
+import redis from 'connect-redis';
+import {development as config} from '../config';
+
+/**
+ * Custom middleware
+ */
+ 
+let RedisStore = redis(session);
+app.use(session({
+  store: new RedisStore(config.redis),
+  secret: config.session_secret,
+  resave: true,
+  saveUninitialized: true}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 /**
  * Get port from environment and store in Express.
