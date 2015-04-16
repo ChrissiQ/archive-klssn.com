@@ -1,0 +1,18 @@
+extends layout
+
+block styles
+    link(rel='stylesheet', href='/css/style.css')
+
+block scripts
+    script(src='/js/socket.io.min.js')
+    script(type='text/javascript' src='/js/require.js' data-main="/js/app")
+
+    script.
+        //(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        //function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+        //e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+        //e.src='//www.google-analytics.com/analytics.js';
+        //r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+        //ga('create','UA-XXXXX-X');ga('send','pageview');
+
+block content
