@@ -1,18 +1,10 @@
+var express = require('express');
+var router = express.Router();
 
-/*
- * GET home page.
- */
+/* GET home page. */
+router.get('/', function(req, res, next) {
+    if (res.err) res.render('Error!' + res.err)
+    res.render('index', { title: 'Chrissi Klassen'})
+});
 
-var mongoose  = require('mongoose')
-  , Definition= mongoose.model('Definition')
-
-
-exports.index = function (req, res) {
-
-  Definition.random(function (err, def) {
-    if (err) res.render('Error!' + err)
-    res.render('index', { title: 'Chrissi Klassen',
-                          def: def,
-                          csrf: req.csrfToken() })
-  })
-}
+export default router;
