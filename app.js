@@ -30,6 +30,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 /**
  * Custom middleware
  */
+
+ app.use(orm.express(config.database, {
+  define: function (db, models, next) {
+    models.user = db.define("user", {
+      username : String,
+      password : String
+    });
+    next();
+  }
+}));
  
 let RedisStore = redis(session);
 
@@ -40,21 +50,27 @@ app.use(session({
   saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
-
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
+passport.serializeUser((user, done) => done(null, user));
+passport.deserializeUser((user, done) => done(null, user));
 
 let LocalStrategy = passportLocal.Strategy;
-passport.use(new LocalStrategy(function(username, password, done) {
-  process.nextTick(function() {
-    // Auth Check Logic
-  });
-}));
+passport.use(new LocalStrategy(
+  {passReqToCallback: true},
+
+  (req, username, password, done) => {
+    req.models.user.find(
+
+      {'username': username},
+      1,
+      (err, user) => {
+        if (err) return done(err);
+        if (!user) return done(null, false);
+        if (user.password != password) return done(null, false);
+        return done(null, user);
+      }
+    );
+  }
+));
 
 router(app);
 
