@@ -31,11 +31,12 @@ app.use(express.static(path.join(__dirname, 'public')));
  * Custom middleware
  */
 
- app.use(orm.express(config.database, {
+app.use(orm.express(config.database, {
   define: function (db, models, next) {
     models.user = db.define("user", {
-      username : String,
-      password : String
+      name: String,
+      password: String,
+      email: {type: 'text', unique: true, lowercase: true}
     });
     next();
   }
