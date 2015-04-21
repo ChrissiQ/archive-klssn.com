@@ -1,11 +1,19 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var app = express();
+import express from 'express';
+import path from 'path';
+import favicon from 'serve-favicon';
+import logger from 'morgan';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import passport from 'passport';
+import passportLocal from 'passport-local';
+import session from 'express-session';
+import redis from 'connect-redis';
+import orm from 'orm';
+
 import router from './router';
+import {development as config} from './config';
+
+let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app/views'));
@@ -19,7 +27,35 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//app.use('/', router);
+/**
+ * Custom middleware
+ */
+ 
+let RedisStore = redis(session);
+
+app.use(session({
+  store: new RedisStore(config.redis),
+  secret: config.session_secret,
+  resave: true,
+  saveUninitialized: true}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
+let LocalStrategy = passportLocal.Strategy;
+passport.use(new LocalStrategy(function(username, password, done) {
+  process.nextTick(function() {
+    // Auth Check Logic
+  });
+}));
+
 router(app);
 
 // catch 404 and forward to error handler

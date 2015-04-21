@@ -13,6 +13,14 @@ const rootPath = path.resolve(__dirname + '../')
     db: 2,
     pass: 'RedisPASS'
   },
+  database   : {
+    protocol : "postgresql", // or "mysql"
+    query    : { pool: true },
+    host     : "127.0.0.1",
+    database : "anontxt_dev",
+    user     : "anontxt",
+    password : "apassword"
+  },
   session_secret: '1234asdf'
 };
 
@@ -23,6 +31,14 @@ export var test = {
     port: 6379,
     db: 2,
     pass: 'RedisPASS'
+  },
+  database   : {
+    protocol : "postgresql", // or "mysql"
+    query    : { pool: true },
+    host     : "127.0.0.1",
+    database : "anontxt_dev",
+    user     : "anontxt",
+    password : "apassword"
   },
   session_secret: '1234asdf'
 };
@@ -35,6 +51,14 @@ export var staging = {
     db: 2,
     pass: 'RedisPASS'
   },
+  database   : {
+    protocol : "postgresql", // or "mysql"
+    query    : { pool: true },
+    host     : "127.0.0.1",
+    database : "anontxt_dev",
+    user     : "anontxt",
+    password : "apassword"
+  },
   session_secret: '1234asdf'
 };
 
@@ -45,6 +69,14 @@ export var production = {
     port: 6379,
     db: 2,
     pass: 'RedisPASS'
+  },
+  database   : {
+    protocol : "postgresql", // or "mysql"
+    query    : { pool: true },
+    host     : "127.0.0.1",
+    database : "anontxt_dev",
+    user     : "anontxt",
+    password : "apassword"
   },
   session_secret: '1234asdf'
 };
