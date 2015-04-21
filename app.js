@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
  */
 
 app.use(orm.express(config.database, {
-  define: function (db, models, next) {
+  define: (db, models, next) => {
     models.user = db.define("user", {
       name: String,
       password: String,
@@ -58,10 +58,10 @@ let LocalStrategy = passportLocal.Strategy;
 passport.use(new LocalStrategy(
   {passReqToCallback: true},
 
-  (req, username, password, done) => {
+  (req, name, password, done) => {
     req.models.user.find(
 
-      {'username': username},
+      {'name': name},
       1,
       (err, user) => {
         if (err) return done(err);
@@ -76,7 +76,7 @@ passport.use(new LocalStrategy(
 router(app);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -87,7 +87,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
+  app.use((err, req, res, next) => {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
@@ -98,7 +98,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
