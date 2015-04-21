@@ -17,7 +17,7 @@ define(['jquery', 'underscore', 'backbone'],
 
             reset: function () {
                 this.el.width  = $('body').innerWidth()
-                this.el.height = $('body').innerHeight()
+                this.el.height = 400
                 this.origin = {
                     x: this.el.width/2,
                     y: 0
