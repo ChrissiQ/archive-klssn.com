@@ -1,8 +1,4 @@
+require('babel/register');
+var migration = require('../migrations-es6/1429659326326-add-users.js');
 
-exports.up = function(next){
-  next();
-};
-
-exports.down = function(next){
-  next();
-};
+module.exports = migration;
