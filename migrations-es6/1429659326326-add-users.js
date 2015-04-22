@@ -5,23 +5,20 @@ import orm from 'orm';
 
 export function up (next) {
   orm.connect(config.database, (err, db) => {
-    var User = db.define("user", userModel, userModelOptions);
-    User.drop(() => {
-      console.log("Dropped users.");
-      User.sync(() => {
-        console.log("Synced users");
-        next();
-      });
-    });
+    let User = db.define("user", userModel, userModelOptions);
+    User.drop(
+      () => User.sync(
+        () => next()
+      )
+    );
   });
 };
 
 export function down(next) {
   orm.connect(config.database, (err, db) => {
-    var User = db.define("user", userModel, userModelOptions);
-    User.drop(() => {
-      console.log("Dropped users.");
-      next();
-    });
+    let User = db.define("user", userModel, userModelOptions);
+    User.drop(
+      () => next()
+    );
   });
 };
