@@ -9,6 +9,7 @@ import passportLocal from 'passport-local';
 import session from 'express-session';
 import redis from 'connect-redis';
 import orm from 'orm';
+import bcrypt from 'bcryptjs';
 
 import router from './router';
 import {development as config} from './config';
