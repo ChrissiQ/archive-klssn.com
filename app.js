@@ -12,6 +12,7 @@ import orm from 'orm';
 
 import router from './router';
 import {development as config} from './config';
+import userModel from './app/models/user';
 
 let app = express();
 
@@ -33,11 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(orm.express(config.database, {
   define: (db, models, next) => {
-    models.user = db.define("user", {
-      name: String,
-      password: String,
-      email: {type: 'text', unique: true, lowercase: true}
-    });
+    models.user = db.define("user", userModel);
     next();
   }
 }));
