@@ -1,14 +1,15 @@
-import userModel from '../app/models/user';
-import {development as config} from '../config';
+import { userModel } from '../app/models/user';
+import { userModelOptions } from '../app/models/user';
+import { development as config } from '../config';
 import orm from 'orm';
 
 export function up (next) {
   orm.connect(config.database, (err, db) => {
-    var User = db.define("user", userModel);
+    var User = db.define("user", userModel, userModelOptions);
     User.drop(() => {
       console.log("Dropped users.");
       User.sync(() => {
-        console.log("Synced users.");
+        console.log("Synced users");
         next();
       });
     });
@@ -17,7 +18,7 @@ export function up (next) {
 
 export function down(next) {
   orm.connect(config.database, (err, db) => {
-    var User = db.define("user", userModel);
+    var User = db.define("user", userModel, userModelOptions);
     User.drop(() => {
       console.log("Dropped users.");
       next();
