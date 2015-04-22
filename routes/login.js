@@ -6,7 +6,7 @@ let router = express.Router();
 let LocalStrategy = passportLocal.Strategy;
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
   if (res.err) res.render('Error!' + res.err)
   // req.login(user, function(err) {
   //   if (err) { return next(err); }
@@ -22,11 +22,11 @@ router.post('/',
   })
 );
 
-router.get('/failed', function(req, res, next) {
+router.get('/failed', (req, res, next) => {
   res.send('Failed to authenticate');
 });
  
-router.get('/success', function(req, res, next) {
+router.get('/success', (req, res, next) => {
   res.send('Successfully authenticated');
 });
 
