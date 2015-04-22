@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
 require('babel/register');
-require('./bin/start');
+require('./app/server');

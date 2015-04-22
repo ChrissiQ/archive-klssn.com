@@ -1,14 +1,10 @@
-#!/usr/bin/env node
-
 /**
  * Module dependencies.
  */
 
-import app from '../app';
+import app from './app';
 import http from 'http';
 import debug from 'debug';
-// import routes from '../routes/index';
-// import users from '../routes/users';
 
 
 /**

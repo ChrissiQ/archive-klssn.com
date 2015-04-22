@@ -1,8 +1,8 @@
-var express = require('express');
-var router = express.Router();
+import express from 'express';
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
+let router = express.Router();
+
+router.get('/', (req, res, next) => {
     if (res.err) res.render('Error!' + res.err)
     res.render('index', { title: 'Chrissi Klassen'})
 });

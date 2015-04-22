@@ -1,9 +1,9 @@
- export let userModel = {
+let UserSchema = {
   name: String,
   password: String,
   email: {type: 'text', unique: true, lowercase: true},
 };
 
-export let userModelOptions = {
-  collection: 'users'
-};
+let UserModel = db => db.define("user", UserSchema, {collection: 'users'});
+
+export default UserModel;

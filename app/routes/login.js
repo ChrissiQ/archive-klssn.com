@@ -1,9 +1,7 @@
 import express from 'express';
 import passport from 'passport';
-import passportLocal from 'passport-local';
 
 let router = express.Router();
-let LocalStrategy = passportLocal.Strategy;
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
@@ -23,11 +21,13 @@ router.post('/',
 );
 
 router.get('/failed', (req, res, next) => {
-  res.send('Failed to authenticate');
+  console.log(next);
+  res.send(req.message);//'Failed to authenticate');
 });
  
 router.get('/success', (req, res, next) => {
-  res.send('Successfully authenticated');
+  res.send(req.message);
+  //res.send('Successfully authenticated');
 });
 
 export default router;
