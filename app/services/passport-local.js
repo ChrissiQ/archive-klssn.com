@@ -8,6 +8,7 @@ let config = {
 };
 
 let verify = (req, email, password, done) => {
+  console.log(`Verifying email is ${email} and password is ${password}`);
   let Users = req.models.user;
 
   Users.find({'email': email}, 1, (err, user) => {
@@ -19,6 +20,9 @@ let verify = (req, email, password, done) => {
       return done(null, false);
 
     bcrypt.compare(password, user.password, (err, res) => {
+
+      if (err)
+        return done(err);
 
       if (!res)
         return done(null, false);

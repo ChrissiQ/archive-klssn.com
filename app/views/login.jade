@@ -2,6 +2,13 @@ extends layout
 
 block content
   form(action="/login" method="post")
+    if flash && flash.errors
+      each error in flash.errors
+        p= error.msg
+        
+    if flash && flash.success
+      each success in flash.success
+        p= success.msg
     p
       label Username
       input(type="text" name="username")

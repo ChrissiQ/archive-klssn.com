@@ -4,6 +4,19 @@ let UserSchema = {
   email: {type: 'text', unique: true, lowercase: true},
 };
 
-let UserModel = db => db.define("user", UserSchema, {collection: 'users'});
+let options = {
+  collection: 'users',
+  methods: {
+    serialize: () => {
+      return {
+        name: this.name,
+        email: this.email,
+        createdAt : moment(this.createdAt).fromNow()
+      }
+    }
+  }
+}
+
+let UserModel = db => db.define("user", UserSchema, options);
 
 export default UserModel;
