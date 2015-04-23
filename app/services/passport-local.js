@@ -1,5 +1,7 @@
 import passport from 'passport';
 import passportLocal from 'passport-local';
+import debug from 'debug';
+import bcrypt from 'bcrypt';
 
 let config = {
   usernameField: 'email',
@@ -8,10 +10,9 @@ let config = {
 };
 
 let verify = (req, email, password, done) => {
-  console.log(`Verifying email is ${email} and password is ${password}`);
   let Users = req.models.user;
 
-  Users.find({'email': email}, 1, (err, user) => {
+  Users.one({'email': email}, (err, user) => {
 
     if (err)
       return done(err);
