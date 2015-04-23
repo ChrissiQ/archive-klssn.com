@@ -32,8 +32,13 @@ let appGenerator = (connection, models) => {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  passport.serializeUser((user, done) => done(null, user));
-  passport.deserializeUser((user, done) => done(null, user));
+  passport.serializeUser((user, done) => done(null, user.id));
+  passport.deserializeUser((id, done) => {
+    let User = models.user;
+    User.find(id)
+      .then(user => done(null, user))
+      .catch(err => done(err, null));
+  });
   passport.use(localStrategy);
 
   app.use(router);

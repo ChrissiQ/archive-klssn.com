@@ -7,9 +7,19 @@ let router = express.Router();
 /* GET users listing. */
 router.get('/', (req, res, next) => {
   let User = req.models.user;
+
   User.findAll()
-    .then(users => res.send(users))
-    .catch(err => console.error(err));
+  .then(users => res.send(users))
+  .catch(err => console.error(err));
+});
+
+router.get('/:name', (req, res, next) => {
+  let name = req.params.name;
+  let User = req.models.user;
+
+  User.find({where: {'name': name}})
+  .then(user => res.send(user))
+  .catch(err => console.error(err));
 });
 
 router.post('/', (req, res, next) => {
