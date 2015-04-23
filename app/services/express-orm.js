@@ -1,6 +1,6 @@
 import orm from 'orm';
-import {development as secret} from '../config/secret';
 import UserModel from '../models/user';
+import {development as secret} from '../config/secret';
 
 let define = (db, models, next) => {
   models.user = UserModel(db);

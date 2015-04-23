@@ -1,11 +1,10 @@
-import { userModel } from '../app/models/user';
-import { userModelOptions } from '../app/models/user';
-import { development as config } from '../config';
 import orm from 'orm';
+import UserModel from '../app/models/user';
+import {development as secret} from '../app/config/secret';
 
 export function up (next) {
-  orm.connect(config.database, (err, db) => {
-    let User = db.define("user", userModel, userModelOptions);
+  orm.connect(secret.database, (err, db) => {
+    let User = UserModel(db);
     User.drop(
       () => User.sync(
         () => next()
@@ -15,8 +14,8 @@ export function up (next) {
 };
 
 export function down(next) {
-  orm.connect(config.database, (err, db) => {
-    let User = db.define("user", userModel, userModelOptions);
+  orm.connect(secret.database, (err, db) => {
+    let User = UserModel(db);
     User.drop(
       () => next()
     );
