@@ -13,58 +13,63 @@ import sequelizeService from './services/express-sequelize';
 import sessionService from './services/express-session';
 import localStrategy from './services/passport-local';
 
-let app = express();
+let appGenerator = (connection, models) => {
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+  let app = express();
 
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(validator());
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../public')));
-app.use(flash());
-app.use(sequelizeService);
-app.use(sessionService);
-app.use(passport.initialize());
-app.use(passport.session());
+  app.set('views', path.join(__dirname, 'views'));
+  app.set('view engine', 'jade');
 
-passport.serializeUser((user, done) => done(null, user));
-passport.deserializeUser((user, done) => done(null, user));
-passport.use(localStrategy);
+  app.use(logger('dev'));
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(validator());
+  app.use(cookieParser());
+  app.use(express.static(path.join(__dirname, '../public')));
+  app.use(flash());
+  app.use(sequelizeService(connection, models));
+  app.use(sessionService);
+  app.use(passport.initialize());
+  app.use(passport.session());
 
-app.use(router);
+  passport.serializeUser((user, done) => done(null, user));
+  passport.deserializeUser((user, done) => done(null, user));
+  passport.use(localStrategy);
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+  app.use(router);
 
-// error handlers
+  // catch 404 and forward to error handler
+  app.use((req, res, next) => {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+  });
 
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
+  // error handlers
+
+  // development error handler
+  // will print stacktrace
+  if (app.get('env') === 'development') {
+    app.use((err, req, res, next) => {
+      res.status(err.status || 500);
+      res.render('error', {
+        message: err.message,
+        error: err
+      });
+    });
+  }
+
+  // production error handler
+  // no stacktraces leaked to user
   app.use((err, req, res, next) => {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
-      error: err
+      error: {}
     });
   });
-}
 
-// production error handler
-// no stacktraces leaked to user
-app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
-});
+  return app;
+};
 
-export default app;
+export default appGenerator;

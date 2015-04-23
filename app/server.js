@@ -2,16 +2,24 @@
  * Module dependencies.
  */
 
-import app from './app';
 import http from 'http';
 import debug from 'debug';
+import appGenerator from './app';
+import Sequelize from 'sequelize';
+import * as secret from './config/secret';
+import models from './models';
 
+let env = process.env.NODE_ENV || "development";
+let config = secret[env];
+let sequelize = new Sequelize(config.databaseString);
+let db = models(sequelize);
+let app = appGenerator(sequelize, db);
 
 /**
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3000');
+let port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
@@ -24,9 +32,11 @@ let server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+sequelize.sync().then(() => {
+  server.listen(port);
+  server.on('error', onError);
+  server.on('listening', onListening);
+});
 
 export default server;
 
