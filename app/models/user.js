@@ -6,7 +6,15 @@ let UserSchema = {
   name: Sequelize.STRING
 };
 
-let options = {};
+let options = {
+  classMethods: {
+    associate: models => {
+      let User = models.user;
+      let Role = models.role;
+      User.belongsToMany(Role, {through: 'users_roles'});
+    }
+  }
+};
 
 let UserModel = db => db.define('user', UserSchema, options);
 
