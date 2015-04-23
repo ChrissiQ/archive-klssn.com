@@ -9,7 +9,7 @@ import validator from 'express-validator';
 import flash from 'connect-flash';
 
 import router from './router';
-import ormService from './services/express-orm';
+import sequelizeService from './services/express-sequelize';
 import sessionService from './services/express-session';
 import localStrategy from './services/passport-local';
 
@@ -25,7 +25,7 @@ app.use(validator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(flash());
-app.use(ormService);
+app.use(sequelizeService);
 app.use(sessionService);
 app.use(passport.initialize());
 app.use(passport.session());

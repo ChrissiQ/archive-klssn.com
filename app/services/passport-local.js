@@ -12,10 +12,7 @@ let config = {
 let verify = (req, email, password, done) => {
   let Users = req.models.user;
 
-  Users.one({'email': email}, (err, user) => {
-
-    if (err)
-      return done(err);
+  Users.find({where: {email: email}}).then((user) => {
 
     if (!user)
       return done(null, false);
@@ -31,7 +28,8 @@ let verify = (req, email, password, done) => {
       return done(null, user);
     });
 
-  });
+  })
+  .catch(err => done(err));
 }
 
 let localStrategy = new passportLocal.Strategy(config, verify);
