@@ -11,9 +11,12 @@ let config = {
 
 let verify = (req, email, password, done) => {
   let Users = req.models.user;
+  let Roles = req.models.role;
 
-  Users.find({where: {email: email}}).then((user) => {
+  console.log("--- FINDING USER BY ID FROM SESSION ---");
+  Users.find({where: {email: email}, include: [{ all: true }]}).then((user) => {
 
+  console.log("=== FOUND ===");
     if (!user)
       return done(null, false);
 

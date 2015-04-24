@@ -8,7 +8,7 @@ let router = express.Router();
 router.get('/', (req, res, next) => {
   let User = req.models.user;
 
-  User.findAll()
+  User.findAll({include: [{ all: true }]})
   .then(users => res.send(users))
   .catch(err => console.error(err));
 });
@@ -16,8 +16,9 @@ router.get('/', (req, res, next) => {
 router.get('/:name', (req, res, next) => {
   let name = req.params.name;
   let User = req.models.user;
+  let Role = req.models.role;
 
-  User.find({where: {'name': name}})
+  User.find({where: {'name': name}, include: [{ all: true }]})
   .then(user => res.send(user))
   .catch(err => console.error(err));
 });

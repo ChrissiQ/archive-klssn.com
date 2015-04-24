@@ -35,8 +35,11 @@ let appGenerator = (connection, models) => {
   passport.serializeUser((user, done) => done(null, user.id));
   passport.deserializeUser((id, done) => {
     let User = models.user;
-    User.find(id)
-      .then(user => done(null, user))
+    console.log("+++ FINDING USER BY ID FROM SESSION +++");
+    User.findOne({where: {id: id}, include: [{ all: true }]})
+      .then(user => {
+        return done(null, user);
+      })
       .catch(err => done(err, null));
   });
   passport.use(localStrategy);

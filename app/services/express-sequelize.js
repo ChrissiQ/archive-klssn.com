@@ -3,5 +3,5 @@ export default (sequelize, models) => {
     req.sequelize = sequelize;
     req.models = models;
     next();
-  }
+  };
 };
