@@ -22,7 +22,7 @@ let appGenerator = (connection, models) => {
 
   app.use(logger('dev'));
   app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.urlencoded({ extended: true }));
   app.use(validator());
   app.use(cookieParser());
   app.use(express.static(path.join(__dirname, '../public')));
@@ -35,11 +35,8 @@ let appGenerator = (connection, models) => {
   passport.serializeUser((user, done) => done(null, user.id));
   passport.deserializeUser((id, done) => {
     let User = models.user;
-    console.log("+++ FINDING USER BY ID FROM SESSION +++");
     User.findOne({where: {id: id}, include: [{ all: true }]})
-      .then(user => {
-        return done(null, user);
-      })
+      .then(user => done(null, user))
       .catch(err => done(err, null));
   });
   passport.use(localStrategy);

@@ -3,3 +3,4 @@ npm-debug.log
 secret.js
 *.rdb
 migrations/.migrate
+*.sublime-*

@@ -13,8 +13,26 @@ router.get('/', (req, res, next) => {
   res.render('login', { title: 'Chrissi Klassen', flash: req.flash() })
 });
 
-router.post('/',
-  passport.authenticate('local'),
-  (req, res, next) => res.redirect('/users/' + req.user.name));
+router.post('/', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+
+    if (err)
+      return next(err);
+
+    if (!user) {
+      req.session.messages = info.message;
+    }
+
+    req.logIn(user, err => {
+      if (err) {
+        req.session.messages = "Error";
+        return next(err);
+      }
+
+      req.session.messages = "Login successful.";
+      res.redirect('/users/' + req.user.name);
+    });
+  })(req, res, next);
+});
 
 export default router;
