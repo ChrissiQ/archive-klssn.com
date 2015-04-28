@@ -11,7 +11,7 @@ router.get('/', function (req, res, next) {
   if (!user || !isAuthenticated || !user.IsAdmin())
     return res.status(401).end();
 
-  return res.send(user);
+  return res.render('admin', {name: user.name});
 });
 
 export default router;
