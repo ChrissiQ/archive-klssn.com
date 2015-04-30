@@ -23,7 +23,7 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('./public/css'));
 });
 
-gulp.task('default', ['sass'], function() {
+gulp.task('default', ['sass', 'js'], function() {
   gulp.watch('./app/scss/**/*.scss', ['sass']);
 });
 
