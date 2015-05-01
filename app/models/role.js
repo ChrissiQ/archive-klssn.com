@@ -1,7 +1,11 @@
 import Sequelize from 'sequelize';
 
 let RoleSchema = {
-  name: Sequelize.STRING
+  name: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false
+  }
 };
 
 let options = {
