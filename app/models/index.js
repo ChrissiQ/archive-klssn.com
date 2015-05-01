@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-export default (sequelize) => {
+export default sequelize => {
   let db = {};
   fs
     .readdirSync(__dirname)
