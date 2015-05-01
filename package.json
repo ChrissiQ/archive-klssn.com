@@ -8,6 +8,7 @@
   },
   "main": "index.js",
   "dependencies": {
+    "adjective-adjective-animal": "git://github.com/ChrissiQ/adjective-adjective-animal.git",
     "babel": "^5.1.11",
     "bcrypt": "^0.8.2",
     "body-parser": "^1.12.3",

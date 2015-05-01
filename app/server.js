@@ -8,6 +8,7 @@ import appGenerator from './app';
 import Sequelize from 'sequelize';
 import * as secret from './config/secret';
 import models from './models';
+import seqConfig from './config/sequelize';
 
 let env = process.env.NODE_ENV || "development";
 let config = secret[env];
@@ -32,7 +33,7 @@ let server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-sequelize.sync().then(() => {
+sequelize.sync(seqConfig.logOptions).then(() => {
   server.listen(port);
   server.on('error', onError);
   server.on('listening', onListening);
