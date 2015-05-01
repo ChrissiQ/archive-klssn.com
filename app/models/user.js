@@ -15,9 +15,15 @@ let options = {
     }
   },
   instanceMethods: {
+    getRoleNames: function() {
+      return this.roles.map((currentValue, index, array) => {
+        return currentValue.name;
+      });
+    },
     IsAdmin: function () {
-      for (var role in this.roles)
-        if (this.roles[role].name === 'admin')
+      let roles = this.getRoleNames();
+      for (var index in roles)
+        if (roles[index] === 'admin')
           return true;
       return false;
     }
