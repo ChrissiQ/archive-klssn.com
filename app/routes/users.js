@@ -18,7 +18,7 @@ router.get('/:name', (req, res, next) => {
   let User = req.models.user;
   let Role = req.models.role;
 
-  User.cFindBy({name: name})
+  User.cFindAll({name: name})
   .then(users => res.send(users))
   .catch(err => console.error(err));
 });

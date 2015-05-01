@@ -35,7 +35,7 @@ let appGenerator = (connection, models) => {
   passport.serializeUser((user, done) => done(null, user.id));
   passport.deserializeUser((id, done) => {
     let User = models.user;
-    User.cFindBy({id: id})
+    User.cFindOne({id: id})
       .then(user => done(null, user))
       .catch(err => done(err, null));
   });

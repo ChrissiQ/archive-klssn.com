@@ -48,11 +48,12 @@ let options = {
       let Role = models.role;
       User.belongsToMany(Role, {through: 'users_roles'});
     },
-    cFindAll: function () { return this.findAll(config.findOptions) },
-    cFindBy: function (where) {
+    cFind: function(where, cb) {
       let whereOpts = Object.assign({where: where}, config.findOptions);
-      return this.find(whereOpts);
-    }
+      return this[cb](whereOpts);
+    },
+    cFindAll: function (where = {}) { return this.cFind(where, "findAll") },
+    cFindOne: function (where = {}) { return this.cFind(where, "find") }
   },
   instanceMethods: {
     getRoleNames: function () {

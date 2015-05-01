@@ -12,7 +12,7 @@ let config = {
 let verify = (req, email, password, done) => {
   let Users = req.models.user;
 
-  Users.cFindBy({email: email}).then((user) => {
+  Users.cFindOne({email: email}).then((user) => {
 
     if (!user)
       return done(null, false);
