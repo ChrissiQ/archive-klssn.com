@@ -37,7 +37,12 @@ router.post('/', (req, res, next) => {
         email: req.body.email,
         password: hash
       }).then(user => res.send(user))
-        .catch(err => console.error(err));
+        .catch(err => {
+          if (err.name === 'SequelizeUniqueConstraintError') {
+            res.status(422);
+          }
+          return res.send(err);
+        });
     });
   });
 });
