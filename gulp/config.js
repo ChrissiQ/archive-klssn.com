@@ -1,11 +1,14 @@
 module.exports = {
   css: {
-    src: './app/scss/**/*.scss',
-    dest: './public/css',
+    src: 'scss/**/*',
+    dest: 'public/css',
   },
   js: {
-    src: './app/js',
+    src: 'js',
     file: 'script.js',
-    dest: './public/js'
+    dest: 'public/js'
+  },
+  app: {
+    src: 'app/**/*'
   }
 };

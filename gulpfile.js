@@ -16,7 +16,10 @@ gulp.task('js', function() {
 gulp.task('sass:watch', function() {
   watch(c.css.src, {}, bundleCss(c.css.src, c.css.dest));
 });
-gulp.task('watch', ['sass:watch', 'js:watch'], function() {
+gulp.task('app:watch', function() {
+  gulp.watch(c.app.src).on('change', livereload.changed);
+});
+gulp.task('watch', ['sass:watch', 'js:watch', 'app:watch'], function() {
   livereload.listen();
 });
 gulp.task('default', function() {
