@@ -1,28 +1,31 @@
 doctype html
 
-if angular
-    html(data-ng-app='')
-else
-    html
+meta(charset='utf-8')
+meta(http-equiv='X-UA-Compatible', content='IE=edge')
+meta(name='description', content='')
+meta(name='viewport', content='width=device-width, initial-scale=1')
+title= title
+link(rel='stylesheet', href='/css/style.css')
+block styles
+script(async src='/js/script.js')
+block scripts
+input(type='hidden', name='_csrf', id="_csrf", value=token)
+header.ckq-site-header
+  h1 Chrissi Klassen
+  h2 Web Developer
+  nav
+    ul
+      li
+        a(href='/stuff') Stuff
+        li
+          a(href='/stuff') Stuff
+        li
+          a(href='/stuff') Stuff
+        li
+          a(href='/stuff') Stuff
+main.ckq-site-main
+  block content
 
-    head
-        meta(charset='utf-8')
-        meta(http-equiv='X-UA-Compatible', content='IE=edge')
-        meta(name='description', content='')
-        meta(name='viewport', content='width=device-width, initial-scale=1')
-        title= title
-        block styles
-        block scripts
-
-    body
-
-        <!--[if lt IE 8]>
-        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- Add your site or application content here -->
-        block content
-
-        if 'development' == process.env.NODE_ENV
-            script.
-                document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>');
+if 'development' == process.env.NODE_ENV
+  script.
+    document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>');
