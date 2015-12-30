@@ -1,0 +1,7 @@
+@mixin module-main {
+  &site-main {
+    max-width: $container-max-width;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

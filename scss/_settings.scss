@@ -1,0 +1,9 @@
+$screen-width-xsmall: 20em;
+$screen-width-small: 32em;
+
+$media-small: 'screen and (min-width: #{$screen-width-small})';
+$media-xsmall: 'screen and (min-width: #{$screen-width-xsmall})';
+
+$primary-color: hsl(278, 80%, 31%);
+
+$container-max-width: 60em;

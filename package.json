@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=development node index.js",
+    "start": "node index.js",
     "test": "mocha"
   },
   "main": "index.js",
@@ -39,6 +39,8 @@
     "gulp-sass": "^2.1.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-watch": "^4.3.5",
+    "node-neat": "^1.7.2",
+    "node-normalize-scss": "^1.0.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.6.1"

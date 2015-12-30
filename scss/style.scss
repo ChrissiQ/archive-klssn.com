@@ -1,6 +1,19 @@
-html {
-  box-sizing: border-box;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
+@import 'normalize';
+@import 'settings';
+
+@import 'modules/global';
+@import 'modules/header';
+@import 'modules/main';
+@import 'modules/article';
+@import 'modules/footer';
+
+@import url('https://fonts.googleapis.com/css?family=Gilda+Display:200,300,400,500,600,700,800,900|Source+Sans+Pro:200,300,400,500,600,700,800,900|Merriweather:200,300,400,500,600,700,800,900');
+
+@include module-global;
+
+.ckq- {
+  @include module-header;
+  @include module-main;
+  @include module-article;
+  @include module-footer;
 }

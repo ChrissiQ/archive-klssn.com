@@ -1,0 +1,72 @@
+@mixin module-header {
+  &site-header {
+    text-align: center;
+    color: hsl(278, 38%, 80%);
+    background-color: $primary-color;
+    padding-top: 1.5em;
+    padding-bottom: .5em;
+    min-height: 50vw;
+    @include display(flex);
+    @include flex-wrap(wrap);
+    @include justify-content(center);
+    @include align-content(center);
+    @media #{$media-xsmall} {
+      padding-bottom: 0;
+    }
+    @media #{$media-small} {
+      min-height: 16em;
+      padding-top: 2.5em;
+      padding-bottom: 1em;
+    }
+    @include headings {
+      width: 100%;
+      text-align: inherit;
+      margin: 0;
+    }
+    h1 {
+      $w: 0.025em;
+      $c: hsl(278, 100%, 15%);
+      text-shadow:
+        #{-$w} #{-$w} 0 $c,
+         #{$w} #{-$w} 0 $c,
+        #{-$w}  #{$w} 0 $c,
+         #{$w}  #{$w} 0 $c;
+      color: inherit;
+      letter-spacing: 0.05em;
+      font-family: 'Gilda Display', serif;
+      font-weight: 600;
+      font-size: 9.375vw;
+      @media #{$media-small} {
+        font-size: 3em;
+      }
+      @include order(2);
+    }
+    h2 {
+      color: inherit;
+      font-weight: 300;
+      @include order(2);
+      font-size: 10vw;
+      @media #{$media-xsmall} {
+        font-size: 2em;
+      }
+    }
+    nav {
+      background-color: rgba(0,0,0,0.1);
+      color: hsla(0, 0%, 100%, 0.55);
+      font-size: 5vw;
+      font-weight: bold;
+      text-align: center;
+      width: 100%;
+      top: 0;
+      margin-top: 0;
+      margin-bottom: 0.5em;
+      letter-spacing: 0.05em;
+      @include align-self(flex-start);
+      @include order(1);
+      position: absolute;
+      @media #{$media-xsmall} {
+        font-size: 1em;
+      }
+    }
+  }
+}
