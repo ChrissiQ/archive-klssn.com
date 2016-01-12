@@ -1,11 +1,6 @@
 @mixin module-article {
   &article-entry {
-    padding-left: 5vw;
-    padding-right: 5vw;
-    @media #{$media-small} {
-      padding-left: 1em;
-      padding-right: 1em;
-    }
+    @include column;
     p {
       font-size: 1.25em;
     }
@@ -55,8 +50,34 @@
       vertical-align: middle;
       margin-top: -0.5em;
     }
+    ul {
+      list-style: none;
+      display: inline;
+      padding-left: 0;
+    }
+    li {
+      display: inline;
+    }
+    a {
+      display: inline-block;
+      // margin: 0.25em;
+      // font-size: 2em;
+      &:after {
+        content: ", ";
+        display: inline-block;
+      }
+      &:last-child:after {
+        content: "";
+        display: inline-block;
+      }
+    }
   }
   &article-comments {
-    
+    background-color: #eee;
+    @include column;
+  }
+  &comment-list {
+    list-style: none;
+    padding-left: 0;
   }
 }

@@ -6,8 +6,9 @@
 @import 'modules/main';
 @import 'modules/article';
 @import 'modules/footer';
+@import 'column';
 
-@import url('https://fonts.googleapis.com/css?family=Gilda+Display:200,300,400,500,600,700,800,900|Source+Sans+Pro:200,300,400,500,600,700,800,900|Merriweather:200,300,400,500,600,700,800,900');
+@import url('https://fonts.googleapis.com/css?family=Gilda+Display|Source+Sans+Pro:300,400,600,900|Merriweather:900');
 
 @include module-global;
 

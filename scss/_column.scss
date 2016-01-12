@@ -1,0 +1,8 @@
+@mixin column {
+  padding-left: $column-padding-xs;
+  padding-right: $column-padding-xs;
+  @media #{$media-small} {
+    padding-left: $column-padding-sm;
+    padding-right: $column-padding-sm;
+  }
+}

@@ -5,20 +5,23 @@ block content
     header
       h1 Longer Name of Article
       h2 The Description is Awesome
-      p.ckq-article-info
+      div.ckq-article-info
         span(itemprop="author" itemscope itemtype="http://schema.org/Person") by 
           span(itemprop="name") Chrissi Klassen 
         time(itemprop="datePublished" datetime="2015-12-22T10:00:00-05:00") today  
         span.ckq-article-categories Categories: 
-          a(href="/about")
-            span(itemprop="about") About 
+          ul
+            li(itemprop="about")
+              a(href="/about") About 
+            li(itemprop="about")
+              a(href="/cool-stuff") Cool Stuff 
     section
       h1 Section Heading.
       p It has been a very strange year to be a digital law specialist. In a matter of months we have seen “experts,” courts, and politicians suggest that website administrators should get rid of comments, social sharing, analytics, links, and shopping carts, all as a means of coming into compliance with European legislation. Even pro-European developers are at their wits’ end dealing with the deluge of uninformed advice about how their websites are apparently supposed to work.
       p The response of web professionals outside the European Union to 2015’s legal developments has been, quite understandably, “Well, I’m not in the EU, so these laws don’t apply to me, right?” To their surprise, legislators have been clear in their expectation that any website in the world accessed by any European citizen must comply with European digital laws. In response, developers worldwide have had to invest countless unpaid hours and resources into understanding their compliance obligations, despite much of the guidance being incorrect, outdated, or even incomplete.
       aside.ckq-article-comments
-        hr
+        h3 Comments
         ol.ckq-comment-list
           li
-            
-        
+            a(href="#") My name
+            p Stuff is my comment.
