@@ -1,6 +1,6 @@
 module.exports = {
   css: {
-    src: 'scss/**/*',
+    src: 'scss/**/*.scss',
     dest: 'public/css',
   },
   js: {
